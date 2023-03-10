@@ -35,7 +35,7 @@ namespace Projecto_Final
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            
 
             app.MapControllers();
 

@@ -36,9 +36,9 @@ namespace Projecto_Final.Models
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
         [ForeignKey("RoleId")]
-        public UserRole Role { get; set; }
+        public UserRole? Role { get; set; }
 
         //public List<Order>? Orders { get; set; }
         

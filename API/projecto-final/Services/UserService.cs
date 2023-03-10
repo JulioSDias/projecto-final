@@ -24,9 +24,9 @@ namespace Projecto_Final.Services
             return await _context.Users.Include(r => r.Role).ToListAsync();
         }
 
-        public async Task<bool> CreateUser(UserRegisterDTO newUser, int roleId)
+        public async Task<bool> CreateUser(UserRegisterDTO newUser)
         {
-            var role = await _context.Roles.FindAsync(roleId);
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == newUser.RoleName);
 
             if (role == null) {
                 _logging.LogError("role doesn't exist.");
@@ -76,6 +76,12 @@ namespace Projecto_Final.Services
             if(DBuser == null) 
                 return null;
 
+            string roleName;
+            if (DBuser.RoleId == null)
+                roleName = "none";
+            else
+                roleName = DBuser.Role.RoleName;
+
             var ReturnUser = new UserReturnDTO {
                 Id = DBuser.Id,
                 FirstName = DBuser.FirstName,
@@ -89,14 +95,14 @@ namespace Projecto_Final.Services
                 PostalCode = DBuser.PostalCode,
                 CreatedDate = DBuser.CreatedDate,
                 ModifiedDate = DBuser.ModifiedDate,
-                RoleName = DBuser.Role.RoleName,
+                RoleName = roleName,
             };
 
             return ReturnUser;
         }
 
-        public async Task<bool> Delete(string username) {
-            var user = GetByUsername(username);
+        public async Task<bool> DeleteByUsername(string username) {
+            var user = await GetByUsername(username);
             if (user == null) return false;
 
             var DBuser = await _context.Users.FindAsync(user.Id);
@@ -108,6 +114,94 @@ namespace Projecto_Final.Services
             return true;
         }
 
+        public async Task<bool> DeleteById(Guid id)
+        {
+            var DBuser = await _context.Users.FindAsync(id);
+            if (DBuser == null) return false;
+
+            _context.Users.Remove(DBuser);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+
+        public async Task<bool> DeleteById(string username)
+        {
+            var user = await GetByUsername(username);
+            if (user == null) return false;
+
+            var DBuser = await _context.Users.FindAsync(user.Id);
+            if (DBuser == null) return false;
+
+            _context.Users.Remove(DBuser);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> ChangeRole(UserUpdateDTO newChanges) {
+            var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(u => u.Username == newChanges.Username);
+            if (DBuser == null) return false;
+
+            var DBrole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == newChanges.RoleName);
+            if (DBrole == null) return false;
+
+            DBuser.RoleId = DBrole.Id;
+            DBuser.Role = DBrole;
+            DBuser.ModifiedDate = DateTimeOffset.Now;
+            
+            
+            _context.Users.Entry(DBuser).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<List<string>> GetByRole(string rolename)
+        {
+            var users = await _context.Users.Include(r => r.Role).Where(i => i.Role.RoleName == rolename).ToListAsync();
+
+            var usernames = new List<string>();
+            foreach (User user in users)
+            {
+                usernames.Add(user.Username);
+            }
+            return usernames;
+        }
+
+        public async Task<UserReturnDTO> GetById(Guid id) { 
+            var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(i => i.Id == id);
+            if (DBuser == null) return null;
+
+            string roleName;
+            if (DBuser.RoleId == null)
+                roleName = "none";
+            else
+                roleName = DBuser.Role.RoleName;
+
+            var ReturnUser = new UserReturnDTO
+            {
+                Id = DBuser.Id,
+                FirstName = DBuser.FirstName,
+                LastName = DBuser.LastName,
+                Email = DBuser.Email,
+                SocialSecurity = DBuser.SocialSecurity,
+                PhoneNumber = DBuser.PhoneNumber,
+                Address = DBuser.Address,
+                City = DBuser.City,
+                Country = DBuser.Country,
+                PostalCode = DBuser.PostalCode,
+                CreatedDate = DBuser.CreatedDate,
+                ModifiedDate = DBuser.ModifiedDate,
+                RoleName = roleName,
+            };
+            return ReturnUser;
+        }
 
     }
 }
+
+/* https://dev.to/moe23/asp-net-core-rest-api-authorization-with-jwt-roles-vs-claims-vs-policy-step-by-step-5bgn
+ * https://medium.com/geekculture/clean-architecture-jwt-token-authentication-in-rest-api-using-asp-net-core-identity-639e4a8f3900 */

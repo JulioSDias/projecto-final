@@ -7,6 +7,5 @@ namespace Projecto_Final.Services
         Task<bool> Create(string newRole);
         Task<IEnumerable<UserRole>> GetAll();
         Task<bool> Delete(int id);
-        Task<List<string>> GetUsersByRole(int roleId);
     }
 }

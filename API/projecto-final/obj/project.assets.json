@@ -3723,19 +3723,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\Júlio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\VS\\Projecto-Final\\Projecto-Final\\Projecto-Final.csproj",
+      "projectUniqueName": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj",
       "projectName": "Projecto-Final",
-      "projectPath": "C:\\Users\\ASUS\\Desktop\\VS\\Projecto-Final\\Projecto-Final\\Projecto-Final.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Desktop\\VS\\Projecto-Final\\Projecto-Final\\obj\\",
+      "projectPath": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj",
+      "packagesPath": "C:\\Users\\Júlio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Júlio\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3799,7 +3799,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

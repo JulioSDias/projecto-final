@@ -36,7 +36,7 @@ namespace Projecto_Final.Controllers
         {
             if (await _roleService.Delete(id) == true)
             {
-                return Ok(_roleService.GetUsersByRole(id));
+                return Ok();
             }
             return NotFound();
         }

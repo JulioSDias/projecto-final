@@ -27,5 +27,7 @@ namespace Projecto_Final.Models.UserDTOs
         public string Country { get; set; }
         [Required]
         public string PostalCode { get; set; }
+        [Required]
+        public string? RoleName { get; set; }
     }
 }

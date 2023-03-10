@@ -39,28 +39,23 @@ namespace Projecto_Final.Services
         {
             var RoleDB = await _context.Roles.FindAsync(id);
 
-
             if (RoleDB == null)
             {
                 _logging.LogError("Role ID doesn't exist.");
                 return false;
             }
-    
+
+            var users = await _context.Users.Include(r => r.Role).Where(i => i.RoleId == id).ToListAsync();
+
+            foreach (User user in users) {
+                user.RoleId = null;
+                user.Role = null;
+            }
+
             _context.Roles.Remove(RoleDB);
             await _context.SaveChangesAsync();
 
             return true;
-        }
-
-        public async Task<List<string>> GetUsersByRole(int roleId) {
-
-            var users = await _context.Users.Include(r => r.Role).Where(i => i.RoleId == roleId).ToListAsync();
-            
-            var usernames = new List<string>();
-            foreach (User user in users) {
-                usernames.Add(user.Username);
-            }
-            return usernames;
         }
 
     }

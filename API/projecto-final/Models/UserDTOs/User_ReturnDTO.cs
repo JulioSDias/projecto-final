@@ -28,6 +28,6 @@ namespace Projecto_Final.Models.UserDTOs
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
         [Required]
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }
     }
 }
