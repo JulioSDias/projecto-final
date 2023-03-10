@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SodokuAPI.Helpers
+namespace Projecto_Final.Helpers
 {
     public class Security : ISecurity
     {

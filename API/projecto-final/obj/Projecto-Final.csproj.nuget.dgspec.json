@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj",
         "projectName": "Projecto-Final",
-        "projectPath": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\Projecto-Final.csproj",
-        "packagesPath": "C:\\Users\\Júlio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Júlio\\Desktop\\projecto-final-master\\API\\Projecto-Final\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Júlio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.3, )"
@@ -53,6 +57,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -78,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

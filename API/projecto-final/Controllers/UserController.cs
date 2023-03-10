@@ -75,6 +75,14 @@ namespace Projecto_Final.Controllers
                 return NotFound();
             return Ok();
         }
+
+        [HttpPost("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] UserLoginDTO userLogin) {
+            var user = await _userService.Authenticate(userLogin.Username, userLogin.Password);
+            if (user == null)
+                return BadRequest("wrong password or username.");
+            return Ok(user);
+        }
         
     }
 }

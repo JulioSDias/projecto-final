@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Projecto_Final.Contexts;
 using Projecto_Final.Helpers;
 using Projecto_Final.Models;
 using Projecto_Final.Models.UserDTOs;
-using SodokuAPI.Helpers;
 
 namespace Projecto_Final.Services
 {
@@ -12,11 +13,14 @@ namespace Projecto_Final.Services
         private readonly StoreContext _context;
         private readonly ISecurity _security;
         private readonly IAppLogging _logging;
+        private readonly IJwtTokenAuth _jwtauth;
 
-        public UserService(StoreContext  context, ISecurity security, IAppLogging logging) {
+        public UserService(StoreContext  context, ISecurity security, IAppLogging logging, IJwtTokenAuth jwtauth)
+        {
             _context = context;
             _security = security;
             _logging = logging;
+            _jwtauth = jwtauth;
         }
 
         public async Task<IEnumerable<User>> GetAllUsers() 
@@ -198,6 +202,32 @@ namespace Projecto_Final.Services
                 RoleName = roleName,
             };
             return ReturnUser;
+        }
+
+        public async Task<UserAuthenticateDTO?> Authenticate(string Username, string Password) {
+
+            if (Username.IsNullOrEmpty() || Password.IsNullOrEmpty())
+                return null;
+
+            var user = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(u => u.Username == Username);
+
+            if (user == null) return null;
+
+            if (_security.VerifyPassword(Password, user.PasswordHash, user.PasswordSalt)) {
+               string token = _jwtauth.GenerateJwtToken(user);
+
+                var userInfo = new UserAuthenticateDTO
+                {
+                    UserName = user.Username,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Token = token
+                };
+                return userInfo;
+            }
+
+            return null;
         }
 
     }
