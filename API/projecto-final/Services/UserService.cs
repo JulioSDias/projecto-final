@@ -232,6 +232,3 @@ namespace Projecto_Final.Services
 
     }
 }
-
-/* https://dev.to/moe23/asp-net-core-rest-api-authorization-with-jwt-roles-vs-claims-vs-policy-step-by-step-5bgn
- * https://medium.com/geekculture/clean-architecture-jwt-token-authentication-in-rest-api-using-asp-net-core-identity-639e4a8f3900 */

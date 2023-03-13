@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Projecto_Final.Models.DiscountDTOs
 {
-    public class DiscountReturnDTO
+    public class DiscountEditDTO
     {
         [Required]
         public int Id { get; set; }

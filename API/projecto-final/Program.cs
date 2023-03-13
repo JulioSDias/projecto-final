@@ -27,6 +27,8 @@ namespace Projecto_Final
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IDiscountService, DiscountService>();
+            builder.Services.AddScoped<IConsoleService, ConsoleService>();
+            builder.Services.AddScoped<IGenreService, GenreService>();
 
             builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", 
                 app => {

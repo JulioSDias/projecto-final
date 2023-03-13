@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Projecto_Final.Models
-{
-    public class ProductFabric
+{ 
+    public class Genre
     {
         [Key]
         public int Id { get; set; }
@@ -11,7 +12,6 @@ namespace Projecto_Final.Models
         [Required]
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
-
-        //public List<ProductCategory>? Categories { get; set; }
+        public List<ProductGenre> Products { get; set; }
     }
 }

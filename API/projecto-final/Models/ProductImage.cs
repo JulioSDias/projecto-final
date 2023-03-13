@@ -6,6 +6,8 @@ namespace Projecto_Final.Models
     public class ProductImage
     {
         [Required]
+        public string Name { get; set; }
+        [Required]
         public byte[] Image { get; set; }
         [Required]
         public DateTimeOffset CreatedDate { get; set; }
@@ -15,6 +17,5 @@ namespace Projecto_Final.Models
         public int? ProductId { get; set; }
         [ForeignKey("ProductId")]
         public Product? Product { get; set; }
-
     }
 }

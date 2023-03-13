@@ -27,15 +27,15 @@ namespace Projecto_Final.Models
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
 
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        public ProductCategory Category { get; set; }
+        public int ConsoleId { get; set; }
+        [ForeignKey("ConsoleId")]
+        public GameConsole Console { get; set; }
 
         public int? DiscountId { get; set; }
         [ForeignKey("DiscountId")]
-        public ProductDiscount? Discount { get; set; }
+        public Discount? Discount { get; set; }
 
-        //public List<ProductImage>? Images { get; set; }
+        public List<ProductGenre> Genres { get; set; }
 
     }
 }

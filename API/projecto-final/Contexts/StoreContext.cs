@@ -12,12 +12,17 @@ namespace Projecto_Final.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> Order_Items { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductCategory> Categories { get; set; }
-        public DbSet<ProductColor> Colors { get; set; }
-        public DbSet<ProductDiscount> Discounts { get; set; }
-        public DbSet<ProductFabric> Fabrics { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<GameConsole> Consoles { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         public DbSet<ProductImage> Images { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> Roles { get; set; }
+        public DbSet<ProductGenre> ProductGenres { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductGenre>().HasKey(k => new { k.ProductId, k.GenreId });
+        }
     }
 }
