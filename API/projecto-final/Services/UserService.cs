@@ -129,22 +129,7 @@ namespace Projecto_Final.Services
             return true;
         }
 
-
-        public async Task<bool> DeleteById(string username)
-        {
-            var user = await GetByUsername(username);
-            if (user == null) return false;
-
-            var DBuser = await _context.Users.FindAsync(user.Id);
-            if (DBuser == null) return false;
-
-            _context.Users.Remove(DBuser);
-            await _context.SaveChangesAsync();
-
-            return true;
-        }
-
-        public async Task<bool> ChangeRole(UserUpdateDTO newChanges) {
+        public async Task<bool> ChangeRole(UserUpdateRoleDTO newChanges) {
             var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(u => u.Username == newChanges.Username);
             if (DBuser == null) return false;
 
@@ -162,6 +147,34 @@ namespace Projecto_Final.Services
 
             return true;
         }
+        public async Task<bool> Update(Guid id, UserUpdateDTO userChanges) {
+            var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(i => i.Id == id);
+            if (DBuser == null) return false;
+
+            byte[] passwordHash, passwordSalt;
+            passwordSalt = _security.CreatePasswordSalt(userChanges.Password);
+            passwordHash = _security.CreatePasswordHash(userChanges.Password, passwordSalt);
+
+            DBuser.Username = userChanges.Username;
+            DBuser.Email = userChanges.Email;
+            DBuser.PasswordSalt = passwordSalt;
+            DBuser.PasswordHash = passwordHash;
+            DBuser.SocialSecurity = userChanges.SocialSecurity;
+            DBuser.PhoneNumber = userChanges.PhoneNumber;
+            DBuser.Address = userChanges.Address;
+            DBuser.City = userChanges.City;
+            DBuser.Country = userChanges.Country;
+            DBuser.PostalCode = userChanges.PostalCode;
+            DBuser.ModifiedDate = DateTimeOffset.Now;
+
+
+            _context.Users.Entry(DBuser).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return true;
+
+        } 
 
         public async Task<List<string>> GetByRole(string rolename)
         {
@@ -174,6 +187,7 @@ namespace Projecto_Final.Services
             }
             return usernames;
         }
+
 
         public async Task<UserReturnDTO> GetById(Guid id) { 
             var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(i => i.Id == id);

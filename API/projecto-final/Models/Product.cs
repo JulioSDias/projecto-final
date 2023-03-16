@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +17,7 @@ namespace Projecto_Final.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public Status_product Status { get; set; }
+        public Status_product Status { get; set; } = Status_product.ok;
         [Required]
         [Precision(12, 2)]
         public decimal Price { get; set; }
@@ -34,8 +35,7 @@ namespace Projecto_Final.Models
         public int? DiscountId { get; set; }
         [ForeignKey("DiscountId")]
         public Discount? Discount { get; set; }
-
-        public List<ProductGenre> Genres { get; set; }
+        public List<ProductGenre>? Genres { get; set; }
 
     }
 }

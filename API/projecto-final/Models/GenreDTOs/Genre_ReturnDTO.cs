@@ -1,18 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
-namespace Projecto_Final.Models
-{ 
-    public class Genre
+namespace Projecto_Final.Models.GenreDTOs
+{
+    public class GenreReturnDTO
     {
-        [Key]
+        [Required]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset? ModifiedDate { get; set; }
-        public List<ProductGenre> Products { get; set; }
     }
 }

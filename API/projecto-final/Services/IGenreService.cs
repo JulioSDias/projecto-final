@@ -1,12 +1,14 @@
 ﻿using Projecto_Final.Models;
+using Projecto_Final.Models.GenreDTOs;
 
 namespace Projecto_Final.Services
 {
     public interface IGenreService
     {
-        Task<IEnumerable<Genre>> GetAll();
+        Task<IEnumerable<GenreReturnAllDTO>> GetAll();
         Task<bool> Create(string genreName);
-        Task<Genre> GetbyId(int id);
+        Task<GenreReturnAllDTO> GetbyId(int id);
+        Task<Genre> GetbyIdFull(int id);
         Task<bool> DeleteById(int id);
     }
 }

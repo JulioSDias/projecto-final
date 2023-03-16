@@ -69,9 +69,17 @@ namespace Projecto_Final.Controllers
             return NotFound("user not found.");
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> Update(UserUpdateDTO newChanges) {
+        [HttpPut("updateRole")]
+        public async Task<IActionResult> UpdateRole(UserUpdateRoleDTO newChanges) {
             if (await _userService.ChangeRole(newChanges) == false)
+                return NotFound();
+            return Ok();
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateDTO userChanges)
+        {
+            if (await _userService.Update(id, userChanges) == false)
                 return NotFound();
             return Ok();
         }

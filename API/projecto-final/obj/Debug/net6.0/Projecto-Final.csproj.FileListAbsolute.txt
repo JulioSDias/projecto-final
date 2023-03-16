@@ -251,3 +251,6 @@ C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\obj\Debug\net6.0\Proj
 C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\obj\Debug\net6.0\Projecto-Final.genruntimeconfig.cache
 C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\obj\Debug\net6.0\ref\Projecto-Final.dll
 C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ASUS\Desktop\VS\projecto-final\API\Projecto-Final\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

@@ -17,6 +17,8 @@ namespace Projecto_Final
             // Add services to the container.
 
             builder.Services.AddControllers();
+            //builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -26,6 +28,7 @@ namespace Projecto_Final
             builder.Services.AddScoped<IAppLogging, AppLogging>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IDiscountService, DiscountService>();
             builder.Services.AddScoped<IConsoleService, ConsoleService>();
             builder.Services.AddScoped<IGenreService, GenreService>();
