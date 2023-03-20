@@ -1,20 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Projecto_Final.Models
+namespace Projecto_Final.Models.OrderDTOs
 {
-    public enum Status_Order { 
-        Complete,
-        Pending,
-        Transport,
-        Waiting,
-        Disable,
-        Canceled,
-    }
-    public class Order
+    public class OrderReturnDTO
     {
-        [Key]
+        [Required]
         public Guid Id { get; set; }
         public string? ClientName { get; set; }
         public string? AddressLine { get; set; }
@@ -28,10 +19,5 @@ namespace Projecto_Final.Models
         public DateTimeOffset? ModifiedDate { get; set; }
 
         public Guid? UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User? User { get; set; }
-
-        [Required]
-        public List<OrderItem> Items { get; set; }
     }
 }

@@ -12,13 +12,15 @@ namespace Projecto_Final.Services
         private readonly IConsoleService _consoleService;
         private readonly IGenreService _genreService;
         private readonly IDiscountService _discountService;
+        private readonly IImageService _imageService;
 
-        public ProductService(StoreContext context, IConsoleService consoleService, IDiscountService discountService, IGenreService genreService)
+        public ProductService(StoreContext context, IConsoleService consoleService, IDiscountService discountService, IGenreService genreService, IImageService imageService)
         {
             _context = context;
             _consoleService = consoleService;
             _discountService = discountService;
             _genreService = genreService;
+            _imageService = imageService;
         }
 
         public async Task<IEnumerable<ProductReturnDTO>> GetAll()
@@ -43,17 +45,20 @@ namespace Projecto_Final.Services
                     };
                     genres.Add(returnGenre);
                 }
-
+                var images = await _imageService.GetImagesByProductId(product.Id);
                 var returnProduct = new ProductReturnDTO
                 {
-                    Id =product.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     Stock = product.Stock,
                     Description = product.Description,
+                    CreatedDate = product.CreatedDate,
+                    ModifiedDate = product.ModifiedDate,
                     Discount = product.Discount,
                     Console = product.Console,
-                    Genres = genres
+                    Genres = genres,
+                    Images = images
                 };
                 returnProducts.Add(returnProduct);
             }
@@ -123,7 +128,7 @@ namespace Projecto_Final.Services
                 };
                 genres.Add(returnGenre);
             }
-
+            var images = await _imageService.GetImagesByProductId(DBproduct.Id);
             var returnProduct = new ProductReturnDTO
             {
                 Id = DBproduct.Id,
@@ -131,9 +136,12 @@ namespace Projecto_Final.Services
                 Price = DBproduct.Price,
                 Stock = DBproduct.Stock,
                 Description = DBproduct.Description,
+                CreatedDate = DBproduct.CreatedDate,
+                ModifiedDate = DBproduct.ModifiedDate,
                 Discount = DBproduct.Discount,
                 Console = DBproduct.Console,
-                Genres = genres
+                Genres = genres,
+                Images = images
             };
             return returnProduct;
         }

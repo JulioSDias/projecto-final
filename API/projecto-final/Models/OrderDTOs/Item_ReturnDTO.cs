@@ -1,11 +1,10 @@
-﻿#nullable disable
-using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace Projecto_Final.Models
+namespace Projecto_Final.Models.OrderDTOs
 {
-    public class OrderItem
+    public class ItemReturnDTO
     {
         [Key]
         public int Id { get; set; }
@@ -20,12 +19,8 @@ namespace Projecto_Final.Models
 
         [Required]
         public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
 
         [Required]
         public Guid OrderId { get; set; }
-        [ForeignKey("OrderId")]
-        public Order Order { get; set; }
     }
 }
