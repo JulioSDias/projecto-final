@@ -11,6 +11,6 @@ namespace Projecto_Final.Models.OrderDTOs
         public Status_Order Status { get; set; }
 
         public Guid? UserId { get; set; }
-        public List<int> OrderIds { get; set; }
+        public List<ItemCreateDTO> Items { get; set; }
     }
 }

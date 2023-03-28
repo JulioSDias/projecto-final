@@ -7,7 +7,6 @@ namespace Projecto_Final.Models.OrderDTOs
     {
         [Required]
         public int Quantity { get; set; } = 1;
-        [Required]
         [Precision(12, 2)]
         public decimal Price { get; set; }
         [Required]

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DtZthW1YJXcRYUabS+29IQWI0JcXB38xEdxU3qVJqNKheNNyGK/Um63uhpIsfqUSrgb4P8x/Cz5PHIdz9YLSTA==",
+  "dgSpecHash": "PrGAgh7wBdPaaADbmbRHc/giGjSwCAWF8aDIh7k08hCKB+u6NjMp5aJ4QtGY5SYEOVwIznPWTymBTqWx4tCufQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj",
+  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\Projecto-Final.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

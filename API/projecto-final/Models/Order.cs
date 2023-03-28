@@ -30,7 +30,6 @@ namespace Projecto_Final.Models
         public Guid? UserId { get; set; }
         [ForeignKey("UserId")]
         public User? User { get; set; }
-
         [Required]
         public List<OrderItem> Items { get; set; }
     }

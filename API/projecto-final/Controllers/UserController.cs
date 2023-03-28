@@ -26,7 +26,7 @@ namespace Projecto_Final.Controllers
         public async Task<IActionResult> Register([FromBody] UserRegisterDTO newUser) {
 
             if (await _userService.CreateUser(newUser) == true)
-                return Ok("user created.");
+                return Ok();
             return BadRequest("failed to create user.");
         }
 

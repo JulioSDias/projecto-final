@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\Projecto-Final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\Projecto-Final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\Projecto-Final.csproj",
         "projectName": "Projecto-Final",
-        "projectPath": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\Projecto-Final.csproj",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\Projecto-Final.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\Desktop\\VS\\projecto-final\\API\\Projecto-Final\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\Projecto-Final\\API\\Projecto-Final\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -19,5 +19,7 @@ namespace Projecto_Final.Models.OrderDTOs
         public DateTimeOffset? ModifiedDate { get; set; }
 
         public Guid? UserId { get; set; }
+
+        public List<ItemReturnDTO> Items { get; set; }
     }
 }

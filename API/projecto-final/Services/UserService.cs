@@ -30,7 +30,7 @@ namespace Projecto_Final.Services
 
         public async Task<bool> CreateUser(UserRegisterDTO newUser)
         {
-            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == newUser.RoleName);
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "client");
 
             if (role == null) {
                 _logging.LogError("role doesn't exist.");

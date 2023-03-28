@@ -33,6 +33,7 @@ namespace Projecto_Final
             builder.Services.AddScoped<IConsoleService, ConsoleService>();
             builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddScoped<IImageService, ImageService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
 
             builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", 
                 app => {

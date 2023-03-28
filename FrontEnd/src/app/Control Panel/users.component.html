@@ -1,0 +1,32 @@
+<div>
+    <h2 class="text-center">Users</h2>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">FirstName</th>
+              <th scope="col">LastName</th>
+              <th scope="col">Email</th>
+              <th scope="col">More Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button (click)="teste()" type="button" class="btn btn-primary" (click)="collapse.toggle()" [attr.aria-expanded]="isCollapsed[i]" aria-controls="collapsed">
+                        <i [ngClass]="{'bi bi-chevron-compact-down': isCollapsed[i] === true, 'bi bi-chevron-compact-up': isCollapsed[i] === false}"></i>
+                    </button>
+                </td>
+                <div #collapse="ngbCollapse" [ngbCollapse]="!isCollapsed[i]">
+                    {{user.email}}
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</div>
