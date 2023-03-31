@@ -65,7 +65,7 @@ namespace Projecto_Final.Controllers
         public async Task<IActionResult> DeleteByID(Guid id)
         {
             if (await _userService.DeleteById(id) == true)
-                return Ok("User deleted.");
+                return Ok();
             return NotFound("user not found.");
         }
 
@@ -76,7 +76,7 @@ namespace Projecto_Final.Controllers
             return Ok();
         }
 
-        [HttpPut("update")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateDTO userChanges)
         {
             if (await _userService.Update(id, userChanges) == false)

@@ -12,6 +12,8 @@ namespace Projecto_Final.Models.ProductDTOs
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+         [Required]
+        public string Status { get; set; }
         [Required]
         [Precision(12, 2)]
         public decimal Price { get; set; }

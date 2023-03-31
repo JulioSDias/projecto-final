@@ -18,7 +18,7 @@
       <button class="btn btn-outline-warning" routerLink="control-panel/users" routerLinkActive="active">Users</button>
     </li>
     <li class="nav-item" *ngIf="user.role === 'admin' || user.role === 'employee'">
-      <a class="btn btn-outline-warning" href="#">Products</a>
+      <a class="btn btn-outline-warning" routerLink="control-panel/products" routerLinkActive="active">Products</a>
     </li>
   </ul>    
   <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="user"> 

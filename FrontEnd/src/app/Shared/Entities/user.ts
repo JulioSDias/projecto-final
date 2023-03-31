@@ -1,6 +1,8 @@
+import { Role } from "./role";
+
 export class User {
     id?: string;
-    userName?: string;
+    username?: string;
     password?: string;
     firstName?: string;
     lastName?: string;
@@ -12,5 +14,7 @@ export class User {
     country?: string;
     postalCode?: string;
     token?: string;
-    role?: string;
+    role?: Role;
+    createdDate?: string;
+    modifiedDate?: string;
 }

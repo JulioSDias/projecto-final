@@ -48,7 +48,7 @@ namespace Projecto_Final.Controllers
         public async Task<IActionResult> DeleteByID(int id)
         {
             if (await _productService.Delete(id) == true)
-                return Ok("product deleted.");
+                return Ok();
             return NotFound("product not found.");
         }
 

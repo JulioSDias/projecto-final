@@ -1,32 +1,133 @@
-<div>
-    <h2 class="text-center">Users</h2>
-</div>
-<div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">FirstName</th>
-              <th scope="col">LastName</th>
-              <th scope="col">Email</th>
-              <th scope="col">More Info</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td>{{user.firstName}}</td>
-                <td>{{user.lastName}}</td>
-                <td>{{user.email}}</td>
-                <td>
-                    <button (click)="teste()" type="button" class="btn btn-primary" (click)="collapse.toggle()" [attr.aria-expanded]="isCollapsed[i]" aria-controls="collapsed">
-                        <i [ngClass]="{'bi bi-chevron-compact-down': isCollapsed[i] === true, 'bi bi-chevron-compact-up': isCollapsed[i] === false}"></i>
+<div class="d-flex justify-content-md-center mt-5">
+    <div class="col-6">
+        <div>
+            <h2 class="text-center">Users</h2>
+        </div>
+        <div class="accordion accordion-flush">
+            <div class="accordion-item" *ngFor="let user of users; let i = index">
+            <h2 class="accordion-header" [attr.id]="'heading' + i">
+                <button class="accordion-button" type="button" (click)='openAccordion[i] = !openAccordion[i]' data-bs-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                        {{user.username}} / id: {{ user.id }}
                     </button>
-                </td>
-                <div #collapse="ngbCollapse" [ngbCollapse]="!isCollapsed[i]">
-                    {{user.email}}
+            </h2>
+            <div [attr.id]="'collapse' + i" class="accordion-collapse collapse" [class.show]='openAccordion[i]' [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionUsers">
+                <div class="accordion-body">
+                    <button class="btn btn-danger" (click)="delete(user.id!)">
+                        <i class="bi bi-trash3" style="font-size: 1.5rem;"></i>
+                    </button>
+                    <button class="btn btn-warning mx-2" (click)="isEditable[i] = !isEditable[i]; getCurrentUser(i); submitted = false;">
+                        <i class="bi bi-pencil" style="font-size: 1.5rem; color:white"></i>
+                    </button>
+                    <div *ngIf="!isEditable[i]">
+                        <div class="my-3">
+                            <b class="fw-semibold">ID: </b>
+                            <a>{{ user.id }}</a>
+                            <b class="ms-3 fw-semibold">Role: </b>
+                            <a>{{ user.role!.roleName }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Username: </b>
+                            <a>{{user.username}}</a>
+                            <b class="fw-semibold ms-5">Password: </b>
+                            <a>********</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Name: </b>
+                            <a>{{ user.firstName }} {{ user.lastName }}</a>
+                            <b class="fw-semibold ms-5">Email: </b>
+                            <a>{{ user.email }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Nº social security: </b>
+                            <a>{{ user.socialSecurity }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Nº phone: </b>
+                            <a>{{ user.phoneNumber }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Address: </b>
+                            <a>{{ user.address }} / </a>
+                            <a>{{ user.city }} - {{ user.country }} </a>
+                            <a> / {{ user.postalCode }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Created at: </b>
+                            <a>{{ user.createdDate }}</a>
+                        </div>
+                        <div class="my-3">
+                            <b class="fw-semibold">Last modification at: </b>
+                            <a>{{ user.modifiedDate }}</a>
+                        </div>    
+                    </div>
+                    <div *ngIf="isEditable[i]">
+                        <form [formGroup]="form" (ngSubmit)="update(user.id!, i)">
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.role.roleName"></label>
+                                <input type="text" formControlName="roleName" class="form-control mx-3" placeholder="Role"/>
+                            </div>
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.username"></label>
+                                <input type="text" formControlName="username" class="form-control mx-3" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && values['username'].errors }"/>
+                                <div *ngIf="submitted && values['username'].errors" class="invalid-feedback">
+                                    <div *ngIf="values['username'].errors['required']">Field is required</div>
+                                </div>
+
+                                <label class="form-label" for="user.password"></label>
+                                <input type="text" formControlName="password" class="mx-3 form-control" placeholder="Password"/>
+                            </div>
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.email"></label>
+                                <input type="email" formControlName="email" class="mx-3 form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && values['email'].errors }"/>
+                                    <div *ngIf="submitted && values['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['email'].errors['required']">Field is required</div>
+                                        <div *ngIf="values['email'].errors['email']">Invalid email</div>
+                                    </div>
+                            </div>
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.socialSecurity"></label>
+                                <input type="number" formControlName="socialSecurity" class="mx-3 form-control" placeholder="Social security" [ngClass]="{ 'is-invalid': submitted && values['socialSecurity'].errors }"/>
+                                    <div *ngIf="submitted && values['socialSecurity'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['socialSecurity'].errors['required']">Field is required</div>
+                                    </div>
+                            </div>
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.phoneNumber"></label>
+                                <input type="number" formControlName="phoneNumber" class="mx-3 form-control" placeholder="Phone number" [ngClass]="{ 'is-invalid': submitted && values['phoneNumber'].errors }"/>
+                                    <div *ngIf="submitted && values['phoneNumber'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['phoneNumber'].errors['required']">Field is required</div>
+                                    </div>
+                            </div>
+                            <div class="my-3 input-group">
+                                <label class="form-label" for="user.address"></label>
+                                <input type="text" formControlName="address" class="w-100 form-control" placeholder="Address" [ngClass]="{ 'is-invalid': submitted && values['address'].errors }"/>
+                                    <div *ngIf="submitted && values['address'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['address'].errors['required']">Field is required</div>
+                                    </div>
+                                <label class="form-label" for="user.city"></label>
+                                <input type="text" formControlName="city" class="my-2 w-25 form-control" placeholder="City" [ngClass]="{ 'is-invalid': submitted && values['city'].errors }"/>
+                                    <div *ngIf="submitted && values['city'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['city'].errors['required']">Field is required</div>
+                                    </div>
+                                <label class="form-label" for="user.country"></label>
+                                <input type="text" formControlName="country" class="my-2 mx-3 w-25 form-control" placeholder="Country" [ngClass]="{ 'is-invalid': submitted && values['country'].errors }" />
+                                    <div *ngIf="submitted && values['country'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['country'].errors['required']">Field is required</div>
+                                    </div>
+                                <label class="form-label" for="user.postalCode"></label>
+                                <input type="text" formControlName="postalCode" class="my-2 w-25 form-control" placeholder="Postal Code"  [ngClass]="{ 'is-invalid': submitted && values['postalCode'].errors }" />
+                                    <div *ngIf="submitted && values['postalCode'].errors" class="invalid-feedback">
+                                        <div *ngIf="values['postalCode'].errors['required']">Field is required</div>
+                                    </div>
+                            </div>
+                            <button [disabled]="loading" class="btn btn-success">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                                <i class="bi bi-check2" style="font-size: 1.5rem;"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>

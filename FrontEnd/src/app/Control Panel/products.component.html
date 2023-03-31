@@ -1,0 +1,73 @@
+<div class="d-flex mt-5">
+    <div class="col-5">
+        <div>
+            <h2 class="text-center">Add product</h2>
+        </div>
+    </div>
+    <div class="col-2">
+    </div>
+    <div class="col-5">
+        <div>
+            <h2 class="text-center">Products</h2>
+        </div>
+        <div class="accordion accordion-flush">
+            <div class="accordion-item" *ngFor="let product of products; let i = index">
+                <h2 class="accordion-header" [attr.id]="'heading' + i">
+                    <button class="accordion-button" type="button" (click)='openAccordion[i] = !openAccordion[i]' data-bs-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                            {{product.name}} / id: {{ product.id }}
+                        </button>
+                </h2>
+                <div [attr.id]="'collapse' + i" class="accordion-collapse collapse" [class.show]='openAccordion[i]' [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accordionProducts">
+                    <div class="accordion-body">
+                        <button class="btn btn-danger" (click)="delete(product.id!)">
+                            <i class="bi bi-trash3" style="font-size: 1.5rem;"></i>
+                        </button>
+                        <button class="btn btn-warning mx-2" (click)="isEditable[i] = !isEditable[i];">
+                            <i class="bi bi-pencil" style="font-size: 1.5rem; color:white"></i>
+                        </button>
+                        <div *ngIf="!isEditable[i]">
+                            <div class="my-3">
+                                <b class="fw-semibold">ID: </b>
+                                <a>{{product.id}}</a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Name: </b>
+                                <a>{{product.name}}</a>
+                                <b class="fw-semibold ms-5">Status: </b>
+                                <a>{{product.status}}</a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Price: </b>
+                                <a>{{product.price}}</a>
+                                <b class="fw-semibold ms-5">Stock: </b>
+                                <a>{{product.stock}}</a>
+                                <b class="fw-semibold ms-5">Discount: </b>
+                                <a>{{product.discount!.discountPercent}}%</a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Console: </b>
+                                <a>{{product.console!.name}}</a>
+                            </div>
+                            <div class="my-3" >
+                                <b class="fw-semibold">Genres: </b>
+                                <a *ngFor="let genre of product.genres">{{genre.name}}, </a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Description: </b>
+                                <a>{{product.description}}</a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Created at: </b>
+                                <a>{{product.createdDate}}</a>
+                            </div>
+                            <div class="my-3">
+                                <b class="fw-semibold">Last modification at: </b>
+                                <a>{{product.modifiedDate}}</a>
+                            </div>    
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+</div>

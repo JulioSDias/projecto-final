@@ -50,6 +50,7 @@ namespace Projecto_Final.Services
                 {
                     Id = product.Id,
                     Name = product.Name,
+                    Status = product.Status.ToString(),
                     Price = product.Price,
                     Stock = product.Stock,
                     Description = product.Description,

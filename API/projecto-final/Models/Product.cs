@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Projecto_Final.Models
 {
     public enum Status_product { 
-        ok,
-        disabled,
-        out_of_stock,
+        OK,
+        Disabled,
+        Out_of_stock,
     }
     public class Product
     {
@@ -17,7 +17,7 @@ namespace Projecto_Final.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public Status_product Status { get; set; } = Status_product.ok;
+        public Status_product Status { get; set; } = Status_product.OK;
         [Required]
         [Precision(12, 2)]
         public decimal Price { get; set; }

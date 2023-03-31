@@ -88,6 +88,8 @@ namespace Projecto_Final.Services
 
             var ReturnUser = new UserReturnDTO {
                 Id = DBuser.Id,
+                Username = DBuser.Username,
+                Password = "SECRET",
                 FirstName = DBuser.FirstName,
                 LastName = DBuser.LastName,
                 Email = DBuser.Email,
@@ -151,14 +153,19 @@ namespace Projecto_Final.Services
             var DBuser = await _context.Users.Include(r => r.Role).FirstOrDefaultAsync(i => i.Id == id);
             if (DBuser == null) return false;
 
-            byte[] passwordHash, passwordSalt;
-            passwordSalt = _security.CreatePasswordSalt(userChanges.Password);
-            passwordHash = _security.CreatePasswordHash(userChanges.Password, passwordSalt);
+            var DBrole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == userChanges.RoleName);
+            if (DBrole == null) return false;
+
+            if(userChanges.Password != null) {
+                byte[] passwordHash, passwordSalt;
+                passwordSalt = _security.CreatePasswordSalt(userChanges.Password);
+                passwordHash = _security.CreatePasswordHash(userChanges.Password, passwordSalt);
+                DBuser.PasswordSalt = passwordSalt;
+                DBuser.PasswordHash = passwordHash;
+            }
 
             DBuser.Username = userChanges.Username;
             DBuser.Email = userChanges.Email;
-            DBuser.PasswordSalt = passwordSalt;
-            DBuser.PasswordHash = passwordHash;
             DBuser.SocialSecurity = userChanges.SocialSecurity;
             DBuser.PhoneNumber = userChanges.PhoneNumber;
             DBuser.Address = userChanges.Address;
@@ -166,6 +173,8 @@ namespace Projecto_Final.Services
             DBuser.Country = userChanges.Country;
             DBuser.PostalCode = userChanges.PostalCode;
             DBuser.ModifiedDate = DateTimeOffset.Now;
+            DBuser.RoleId = DBrole.Id;
+            DBuser.Role = DBrole;
 
 
             _context.Users.Entry(DBuser).State = EntityState.Modified;
@@ -202,6 +211,8 @@ namespace Projecto_Final.Services
             var ReturnUser = new UserReturnDTO
             {
                 Id = DBuser.Id,
+                Username = DBuser.Username,
+                Password = "SECRET",
                 FirstName = DBuser.FirstName,
                 LastName = DBuser.LastName,
                 Email = DBuser.Email,
