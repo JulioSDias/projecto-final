@@ -3,6 +3,76 @@
         <div>
             <h2 class="text-center">Add product</h2>
         </div>
+        <div>
+            <form [formGroup]="addProductForm" (ngSubmit)="addNewProduct()">
+                <div class="my-3 input-group">
+                    <label class="form-label"></label>
+                    <input type="text" formControlName="name" class="form-control mx-3" placeholder="name" [ngClass]="{ 'is-invalid': submitted && values['name'].errors }"/>
+                    <div *ngIf="submitted && values['name'].errors" class="invalid-feedback">
+                        <div *ngIf="values['name'].errors['required']">Field is required</div>
+                    </div>
+
+                </div>
+                <div class="my-3 input-group">
+                    <label class="form-label"></label>
+                        <input type="number" formControlName="price" class="w-50 form-control" placeholder="Price" [ngClass]="{ 'is-invalid': submitted && values['price'].errors }"/>
+                        <div *ngIf="submitted && values['price'].errors" class="invalid-feedback">
+                            <div *ngIf="values['price'].errors['required']">Field is required</div>
+                        </div>
+                    <label class="form-label"></label>
+                    <input type="number" formControlName="stock" class="w-50 form-control" placeholder="Stock" [ngClass]="{ 'is-invalid': submitted && values['stock'].errors }"/>
+                        <div *ngIf="submitted && values['stock'].errors" class="invalid-feedback">
+                            <div *ngIf="values['stock'].errors['required']">Field is required</div>
+                        </div>
+                </div>
+                <div class="my-3 input-group">
+                    <label class="form-label"></label>
+                    <input type="text" formControlName="console" class="form-control mx-3" placeholder="Console" [ngClass]="{ 'is-invalid': submitted && values['console'].errors }"/>
+                    <div *ngIf="submitted && values['console'].errors" class="invalid-feedback">
+                        <div *ngIf="values['console'].errors['required']">Field is required</div>
+                    </div>
+                </div>
+                <div *ngFor="let genre of genresArray.controls; let i = index" class="my-3 input-group" formArrayName="genresArray">
+                    <label class="form-label"></label>
+                    <input type="text" [formControlName]="i" class="form-control" placeholder="Genre">
+                    <div class="input-group-append" *ngIf="i >= 1">
+                        <button class="ms-1 btn btn-light" (click)="removeGenre(i)" style="font-size: 1.5rem;">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>    
+                    <div *ngIf="i == genresArray.length - 1">
+                        <button class="ms-2 btn btn-success" (click)="addGenre()" style="font-size: 1.5rem;">
+                            <i class="bi bi-plus-lg"></i>
+                        </button> 
+                    </div>     
+                </div>
+                <div class="my-3 input-group">
+                    <label class="form-label"></label>
+                    <textarea type="text" formControlName="description" class="form-control mx-3" placeholder="Description"></textarea>
+                </div>
+                <div formArrayName="images">
+                    <div class="my-3 input-group" *ngFor="let image of imageControls.controls; let i=index" [formGroupName]="i">
+                        <input type="file" (change)="onFileSelected($event, i)" accept="image/*">
+                        <div class="input-group-append" *ngIf="i >= 1">
+                            <button class="ms-1 btn btn-light" (click)="removeImage(i)" style="font-size: 1.5rem;">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>    
+                        <div *ngIf="i == imageControls.controls.length - 1">
+                            <button class="ms-2 btn btn-success" (click)="addImage()" style="font-size: 1.5rem;">
+                                <i class="bi bi-file-earmark-plus-fill"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+                <div>
+                    <button [disabled]="loading" class="btn btn-success">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                        <i class="bi bi-check2" style="font-size: 1.5rem;"></i>
+                    </button>
+                </div>              
+            </form>
+        </div>   
     </div>
     <div class="col-2">
     </div>
